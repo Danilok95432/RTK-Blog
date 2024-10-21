@@ -1,0 +1,62 @@
+.comments_section {
+  width: 100%;
+  &__new_comment {
+    display: flex;
+    gap: 10px;
+    .commentInput {
+      flex-grow: 1;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .commentButton {
+      padding: 8px 15px;
+      background-color: #18a0fb;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+  &__list {
+    list-style: none;
+    padding: 0;
+    .comment {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      &__content {
+        margin-bottom: 10px;
+      }
+      &__info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .reactions {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .likes,
+        .dislikes {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+
+        .likes {
+          color: #18a0fb;
+        }
+
+        .dislikes {
+          color: #fb3640;
+        }
+      }
+    }
+  }
+}
