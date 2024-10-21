@@ -29,12 +29,13 @@
       padding: 15px;
       margin-bottom: 10px;
       border-radius: 8px;
+      text-align: left;
       &__content {
         margin-bottom: 10px;
       }
       &__info {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
         .reactions {
           display: flex;

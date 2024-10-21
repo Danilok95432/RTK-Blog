@@ -5,7 +5,7 @@ import styles from "../styles/posts/_posts.module.scss";
 import ReactLoading from "react-loading";
 import { Post } from "../interfaces/interfaces";
 
-const Posts = () => {
+const PostsPage = () => {
   const [page, setPage] = useState(0);
   const observer = useRef<IntersectionObserver | null>(null);
   const lastPostRef = useRef<HTMLLIElement | null>(null);
@@ -48,7 +48,7 @@ const Posts = () => {
       {isLoading ? (
         <ReactLoading
           type={"spin"}
-          color={"#000000"}
+          color={"#ffffff"}
           height={667}
           width={375}
         />
@@ -68,4 +68,4 @@ const Posts = () => {
   );
 };
 
-export default Posts;
+export default PostsPage;

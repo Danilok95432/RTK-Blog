@@ -3,11 +3,13 @@
   flex-direction: column;
   gap: 20px;
   padding: 20px;
+  
   &__content {
   border: 1px solid #ddd;
   padding: 20px;
   border-radius: 8px;
   text-align: left;
+  
   }
 
   &__title {

@@ -5,12 +5,12 @@ import UserCard from "./UserCard"
 const CommentCard: React.FC<CommentCardProps> = ({ comment }) => {
   return(
     <li className={styles.comment}>
+      <UserCard id={comment.user.id} />
       <div className={styles.comment__content}>
         <p>{comment.body}</p>
       </div>
 
       <div className={styles.comment__info}>
-        <UserCard id={comment.user.id} />
         <div className={styles.reactions}>
           <span className={styles.likes}>
             👍 {comment.likes}

@@ -14,7 +14,7 @@ const PostPage = () => {
     <div className={styles.post_page}>
       {
         isLoading ?
-        <ReactLoading type={"spin"} color={"#000000"} height={667} width={375} />
+        <ReactLoading type={"spin"} color={"#ffffff"} height={667} width={375} />
         :
         <>
           <div className={styles.post_page__content}>

@@ -9,6 +9,9 @@ export const api = createApi({
     getPosts: builder.query<any, any>({
       query: (page) => `posts?limit=${10 + parseInt(page, 10) * 10}&skip=${0}`,
     }),
+    getPostsByUser: builder.query<any, any>({
+      query: (id) => `posts/user/${id}`
+    }),
     getPost: builder.query<any, any>({
       query: (id) => `posts/${id}`,
     }),
@@ -29,6 +32,7 @@ export const api = createApi({
 
 export const {
   useGetPostsQuery,
+  useGetPostsByUserQuery,
   useGetPostQuery,
   useGetCommentsQuery,
   useGetUserQuery,
