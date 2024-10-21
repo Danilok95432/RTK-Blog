@@ -11,10 +11,12 @@
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
   &__title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
   }
 
   &__body {
@@ -37,7 +39,7 @@
     .reactions {
       font-size: 14px;
       color: #555;
-      transition: all .3s ease-in-out;
+      transition: all 0.3s ease-in-out;
     }
 
     .author:hover {

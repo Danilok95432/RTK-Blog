@@ -6,8 +6,8 @@ export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: url }),
   endpoints: (builder) => ({
-    getPosts: builder.query<any, void>({
-      query: () => "posts",
+    getPosts: builder.query<any, any>({
+      query: (page) => `posts?limit=${10 + parseInt(page, 10) * 10}&skip=${0}`,
     }),
     getPost: builder.query<any, any>({
       query: (id) => `posts/${id}`,
