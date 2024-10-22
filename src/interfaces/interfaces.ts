@@ -95,3 +95,7 @@ export interface PostCardProps {
 export interface CommentCardProps {
   comment: Comment
 }
+
+export interface CommentForm {
+  comment: string; 
+}

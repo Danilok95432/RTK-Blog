@@ -1,11 +1,21 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import PostCard from "../components/PostCard";
-import { useGetPostsQuery } from "../store/api";
+import {
+  useGetPostsByTagQuery,
+  useGetPostsQuery,
+  useGetPostsTagListQuery,
+  useSearchPostQuery,
+} from "../store/api";
 import styles from "../styles/posts/_posts.module.scss";
 import ReactLoading from "react-loading";
 import { Post } from "../interfaces/interfaces";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { changeValue } from "../store/search";
 
 const PostsPage = () => {
+  // ленивая загрузка
+
   const [page, setPage] = useState(0);
   const observer = useRef<IntersectionObserver | null>(null);
   const lastPostRef = useRef<HTMLLIElement | null>(null);
@@ -43,25 +53,115 @@ const PostsPage = () => {
     };
   }, [isLoading, isFetching, loadMorePosts]);
 
+  // --------------------
+
+  // поиск
+
+  const search = useSelector((state: RootState) => state.search.value);
+  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState(search);
+  const [openSearch, setOpenSearch] = useState(false);
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(search);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInputValue(value);
+    dispatch(changeValue(value));
+  };
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchTerm(inputValue);
+    }, 500);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [inputValue]);
+
+  const { data: searchRes, isLoading: searchLoading } = useSearchPostQuery(debouncedSearchTerm, {
+    skip: debouncedSearchTerm === "" || debouncedSearchTerm.length < 3,
+  });
+
+  // --------------------
+
+  // фильтрация по тегам
+
+  const { data: tags } = useGetPostsTagListQuery();
+  const [currentTag, setCurrentTag] = useState("");
+  const { data: filterRes, isLoading: filterLoading } = useGetPostsByTagQuery(currentTag, {
+    skip: currentTag === "",
+  });
+
+  // --------------------
+  if(isLoading) return(
+    <ReactLoading
+          type={"spin"}
+          color={"#000000"}
+          height={667}
+          width={375}
+        />
+  ) 
   return (
     <>
-      {isLoading ? (
+      <div
+        className={`${styles.search_bar} ${openSearch ? styles._active : ""}`}
+        onMouseEnter={() => setOpenSearch(true)}
+        onMouseLeave={() => setOpenSearch(false)}
+      >
+        <input
+          className={styles.search_bar__input}
+          onChange={handleChange}
+          onClick={() => setOpenSearch(true)}
+          onMouseEnter={() => setOpenSearch(true)}
+          type="text"
+          placeholder="Введите ваш запрос.."
+          name="search"
+          value={search}
+        />
+        <select
+          className={`${styles.search_bar__tags_filter} ${
+            openSearch ? styles._active : ""
+          }`}
+          onChange={(e) => setCurrentTag(e.target.value)}
+        >
+          <option></option>
+          {tags?.map((tag: string, index: number) => {
+            return (
+              <option key={index} className={styles.tag}>
+                {tag}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      {isLoading || searchLoading || filterLoading ? (
         <ReactLoading
           type={"spin"}
-          color={"#ffffff"}
+          color={"#000000"}
           height={667}
           width={375}
         />
       ) : (
         <ul className={styles.posts_list}>
-          {res?.posts.map((post: Post, index: number) => {
-            const isLastPost = index === res.posts.length - 1;
-            return (
-              <li ref={isLastPost ? lastPostRef : null} key={post.id}>
-                <PostCard key={post.id} post={post} />
-              </li>
-            );
-          })}
+          {(() => {
+            // Определяем, какие посты рендерить
+            const postsToRender =
+              debouncedSearchTerm !== "" || currentTag !== ""
+                ? debouncedSearchTerm !== ""
+                  ? searchRes?.posts
+                  : filterRes?.posts
+                : res?.posts;
+
+            // Рендерим посты
+            return postsToRender?.map((post: Post, index: number) => {
+              const isLastPost = index === postsToRender.length - 1; // Проверяем, последний ли пост
+              return (
+                <li ref={isLastPost ? lastPostRef : null} key={post.id}>
+                  <PostCard post={post} />
+                </li>
+              );
+            });
+          })()}
         </ul>
       )}
     </>

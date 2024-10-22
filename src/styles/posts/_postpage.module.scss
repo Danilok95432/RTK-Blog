@@ -47,13 +47,20 @@
     }
 
     .reactions {
-      display: flex;
-      align-items: center;
+      span {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
     }
 
     .likes,
-    .dislikes {
+    .dislikes,
+    .views {
       margin-left: 5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .likes {
@@ -66,6 +73,7 @@
   }
   &__tags {
     display: flex;
+    justify-content: flex-end;
     flex-wrap: wrap;
     margin-bottom: 10px;
     .tag {

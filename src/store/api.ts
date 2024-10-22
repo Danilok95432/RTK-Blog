@@ -15,6 +15,12 @@ export const api = createApi({
     getPost: builder.query<any, any>({
       query: (id) => `posts/${id}`,
     }),
+    getPostsTagList: builder.query<any, void> ({
+      query: () => `posts/tag-list?limit=10&skip=10`
+    }),
+    getPostsByTag: builder.query<any, any>({
+      query: (tag) => `posts/tag/${tag}`
+    }),
     getComments: builder.query<any, any>({
       query: (id) => `comments/post/${id}`,
     }),
@@ -34,6 +40,9 @@ export const {
   useGetPostsQuery,
   useGetPostsByUserQuery,
   useGetPostQuery,
+  useGetPostsTagListQuery,
+  useGetPostsByTagQuery,
+  useSearchPostQuery,
   useGetCommentsQuery,
   useGetUserQuery,
 } = api;

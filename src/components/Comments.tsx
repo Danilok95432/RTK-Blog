@@ -1,40 +1,40 @@
 import { useGetCommentsQuery } from '../store/api';
 import styles from '../styles/comments/_comments.module.scss'
-import { useState } from 'react'
+import { useForm } from 'react-hook-form';
 import { Comment } from '../interfaces/interfaces';
 import { useParams } from 'react-router-dom';
 import CommentCard from './CommentCard';
+import { useDispatch } from 'react-redux';
+import { CommentForm } from '../interfaces/interfaces';
+import { addComment, setComments } from '../store/comments';
+import { useEffect } from 'react';
 
 const Comments = () => {
   const { id } = useParams()
   const { data: res } = useGetCommentsQuery(id)
+  const dispatch = useDispatch()
 
-  const [newComment, setNewComment] = useState('');
+  const { register, handleSubmit, reset } = useForm<CommentForm>();
 
-  const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewComment(e.target.value)
-  }
-
-  const handleSubmitComment = () => {
-    console.log('New comment:', newComment)
-    setNewComment('')
-  }
+  const onSubmit = (data: CommentForm) => {
+    dispatch(addComment(data.comment));
+    reset() 
+  };
 
   return(
     <div className={styles.comments_section}>
       <h3>Комментарии:</h3>
-      <div className={styles.comments_section__new_comment}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.comments_section__new_comment}>
         <input
           type="text"
           placeholder="Напишите комментарий..."
-          value={newComment}
-          onChange={handleCommentChange}
+          {...register('comment', { required: 'Это поле обязательно' })}
           className={styles.commentInput}
         />
-        <button onClick={handleSubmitComment} className={styles.commentButton}>
+        <button type="submit" className={styles.commentButton}>
           Отправить
         </button>
-      </div>
+      </form>
       <ul className={styles.comments_section__list}>
         {
           res?.comments.map((comment: Comment) => {

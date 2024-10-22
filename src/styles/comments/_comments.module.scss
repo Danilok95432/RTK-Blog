@@ -38,13 +38,17 @@
         justify-content: flex-end;
         align-items: center;
         .reactions {
-          display: flex;
-          align-items: center;
-          gap: 10px;
+          span {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
         }
 
         .likes,
-        .dislikes {
+        .dislikes,
+        .views {
+          margin-left: 5px;
           display: flex;
           align-items: center;
           gap: 5px;
