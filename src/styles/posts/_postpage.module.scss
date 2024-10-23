@@ -52,6 +52,9 @@
         flex-direction: row;
         align-items: center;
       }
+      svg {
+        cursor: pointer;
+      }
     }
 
     .likes,
@@ -69,6 +72,9 @@
 
     .dislikes {
       color: #fb3640;
+      svg {
+        transform: rotate(180deg);
+      }
     }
   }
   &__tags {

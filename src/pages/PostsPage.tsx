@@ -144,17 +144,14 @@ const PostsPage = () => {
       ) : (
         <ul className={styles.posts_list}>
           {(() => {
-            // Определяем, какие посты рендерить
             const postsToRender =
               debouncedSearchTerm !== "" || currentTag !== ""
                 ? debouncedSearchTerm !== ""
                   ? searchRes?.posts
                   : filterRes?.posts
                 : res?.posts;
-
-            // Рендерим посты
             return postsToRender?.map((post: Post, index: number) => {
-              const isLastPost = index === postsToRender.length - 1; // Проверяем, последний ли пост
+              const isLastPost = index === postsToRender.length - 1; 
               return (
                 <li ref={isLastPost ? lastPostRef : null} key={post.id}>
                   <PostCard post={post} />

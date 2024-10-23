@@ -88,6 +88,19 @@ export interface User {
   role: string;
 }
 
+export interface Reaction {
+  like: boolean,
+  dislike: boolean,
+  postId: number | null,
+  commentId: number | null
+}
+
+export interface AddReactionPayload {
+  postId?: number;
+  commentId?: number;
+  reactionType: 'like' | 'dislike';
+}
+
 export interface PostCardProps {
   post: Post
 }
@@ -97,5 +110,6 @@ export interface CommentCardProps {
 }
 
 export interface CommentForm {
-  comment: string; 
+  comment: string,
 }
+
