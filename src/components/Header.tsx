@@ -1,9 +1,11 @@
+import { NavLink } from 'react-router-dom'
 import styles from '../styles/header/_header.module.scss'
 
 const Header = () => {
   return(
     <div className={styles.header}>
-      <button className={styles.login_btn}>Login</button>
+      <NavLink to='/posts' className={styles.header__logo}>Blog</NavLink>
+      <NavLink to='/authorization' className={styles.header__login}>Log in</NavLink>
     </div>
   )
 }
