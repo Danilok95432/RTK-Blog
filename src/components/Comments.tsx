@@ -36,7 +36,7 @@ const Comments = () => {
     }
   }, [dispatch, res]);
 
-  const { register, handleSubmit, reset } = useForm<CommentForm>({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<CommentForm>({
     resolver: yupResolver(schema),
   });
 
@@ -63,12 +63,15 @@ const Comments = () => {
         onSubmit={handleSubmit(onSubmit)}
         className={styles.comments_section__new_comment}
       >
-        <input
-          type="text"
-          placeholder="Напишите комментарий..."
-          {...register("comment", { required: "Это поле обязательно" })}
-          className={styles.commentInput}
-        />
+        <div className={styles.comment_block}>
+          <input
+            type="text"
+            placeholder="Напишите комментарий..."
+            {...register("comment", { required: "Это поле обязательно" })}
+            className={`${styles.comment_block__input} ${errors.comment ? styles.comment_block__error_input : ''}`}
+          />
+          {errors.comment && <label className={styles.comment_block__error}>{errors.comment.message}</label>}
+        </div>
         <button type="submit" className={styles.commentButton}>
           Отправить
         </button>
