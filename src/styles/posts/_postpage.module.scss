@@ -9,7 +9,7 @@
   @media (max-width: 340px) {
     padding: 0;
   }
-  
+
   &__content {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -43,7 +43,7 @@
     .reactions {
       font-size: 14px;
       color: #555;
-      transition: all .3s ease-in-out;
+      transition: all 0.3s ease-in-out;
     }
 
     .author:hover {

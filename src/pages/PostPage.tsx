@@ -13,8 +13,12 @@ const PostPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { data: post, isLoading } = useGetPostQuery(id);
-  const reactions = useSelector((state: RootState) => state.reactions.reactions)
-  const currentPostReactions = reactions.filter((reaction) => reaction.postId == Number(id))
+  const reactions = useSelector(
+    (state: RootState) => state.reactions.reactions
+  );
+  const currentPostReactions = reactions.filter(
+    (reaction) => reaction.postId == Number(id)
+  );
 
   const handleLike = () => {
     dispatch(addReaction({ postId: post.id, reactionType: "like" }));
@@ -30,7 +34,7 @@ const PostPage = () => {
     );
   return (
     <div className={styles.post_page}>
-      <NavLink to='/posts'>К постам</NavLink>
+      <NavLink to="/posts">К постам</NavLink>
       {isLoading ? (
         <ReactLoading
           type={"spin"}
@@ -87,10 +91,14 @@ const PostPage = () => {
                     <svg
                       width="25px"
                       height="25px"
-                      fill={currentPostReactions[0]?.like ? "#ff0000" : "#000000"}
+                      fill={
+                        currentPostReactions[0]?.like ? "#ff0000" : "#000000"
+                      }
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke={currentPostReactions[0]?.like ? "#ff0000" : "#000000"}
+                      stroke={
+                        currentPostReactions[0]?.like ? "#ff0000" : "#000000"
+                      }
                       onClick={handleLike}
                     >
                       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -115,10 +123,14 @@ const PostPage = () => {
                     <svg
                       width="25px"
                       height="25px"
-                      fill={currentPostReactions[0]?.dislike ? "#ff0000" : "#000000"}
+                      fill={
+                        currentPostReactions[0]?.dislike ? "#ff0000" : "#000000"
+                      }
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
-                      stroke={currentPostReactions[0]?.dislike ? "#ff0000" : "#000000"}
+                      stroke={
+                        currentPostReactions[0]?.dislike ? "#ff0000" : "#000000"
+                      }
                       onClick={handleDislike}
                     >
                       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>

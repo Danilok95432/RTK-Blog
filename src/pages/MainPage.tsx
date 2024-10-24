@@ -1,11 +1,11 @@
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
 
 const MainPage = () => {
-  return(
+  return (
     <div>
-      <NavLink to='/posts'>К постам</NavLink>
+      <NavLink to="/posts">К постам</NavLink>
     </div>
-  )
-}
+  );
+};
 
-export default MainPage
+export default MainPage;

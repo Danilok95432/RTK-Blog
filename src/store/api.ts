@@ -10,16 +10,16 @@ export const api = createApi({
       query: (page) => `posts?limit=${10 + parseInt(page, 10) * 10}&skip=${0}`,
     }),
     getPostsByUser: builder.query<any, any>({
-      query: (id) => `posts/user/${id}`
+      query: (id) => `posts/user/${id}`,
     }),
     getPost: builder.query<any, any>({
       query: (id) => `posts/${id}`,
     }),
-    getPostsTagList: builder.query<any, void> ({
-      query: () => `posts/tag-list?limit=10&skip=10`
+    getPostsTagList: builder.query<any, void>({
+      query: () => `posts/tag-list?limit=10&skip=10`,
     }),
     getPostsByTag: builder.query<any, any>({
-      query: (tag) => `posts/tag/${tag}`
+      query: (tag) => `posts/tag/${tag}`,
     }),
     getComments: builder.query<any, any>({
       query: (id) => `comments/post/${id}`,

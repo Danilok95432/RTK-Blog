@@ -25,7 +25,9 @@ const Comments = () => {
   const commentsRedux = useSelector(
     (state: RootState) => state.comments.comments
   );
-  const commentsPost = commentsRedux.filter((comment) => comment.postId == Number(id))
+  const commentsPost = commentsRedux.filter(
+    (comment) => comment.postId == Number(id)
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -52,12 +54,7 @@ const Comments = () => {
   };
   if (isLoading)
     return (
-      <ReactLoading 
-        type={"spin"} 
-        color={"#000000"} 
-        height={667} 
-        width={375} 
-      />
+      <ReactLoading type={"spin"} color={"#000000"} height={667} width={375} />
     );
   return (
     <div className={styles.comments_section}>

@@ -6,10 +6,7 @@ import UserCard from "./UserCard";
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
   return (
     <div className={styles.post_card}>
-      <NavLink
-        className={styles.link}
-        to={`/posts/${post.id}`}
-      >
+      <NavLink className={styles.link} to={`/posts/${post.id}`}>
         <h2 className={styles.post_card__title}>{post.title}</h2>
         <p className={styles.post_card__body}>{post.body}</p>
       </NavLink>

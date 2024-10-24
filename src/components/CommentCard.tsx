@@ -11,8 +11,12 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment }) => {
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
 
-  const reactions = useSelector((state: RootState) => state.reactions.reactions)
-  const currentCommentReactions = reactions.filter((reaction) => reaction.commentId == Number(comment.id))
+  const reactions = useSelector(
+    (state: RootState) => state.reactions.reactions
+  );
+  const currentCommentReactions = reactions.filter(
+    (reaction) => reaction.commentId == Number(comment.id)
+  );
 
   const handleLike = () => {
     if (dislike) {
@@ -47,7 +51,9 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment }) => {
                 fill={currentCommentReactions[0]?.like ? "#ff0000" : "#000000"}
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
-                stroke={currentCommentReactions[0]?.like ? "#ff0000" : "#000000"}
+                stroke={
+                  currentCommentReactions[0]?.like ? "#ff0000" : "#000000"
+                }
                 onClick={handleLike}
               >
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -72,10 +78,14 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment }) => {
               <svg
                 width="25px"
                 height="25px"
-                fill={currentCommentReactions[0]?.dislike ? "#ff0000" : "#000000"}
+                fill={
+                  currentCommentReactions[0]?.dislike ? "#ff0000" : "#000000"
+                }
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
-                stroke={currentCommentReactions[0]?.dislike ? "#ff0000" : "#000000"}
+                stroke={
+                  currentCommentReactions[0]?.dislike ? "#ff0000" : "#000000"
+                }
                 onClick={handleDislike}
               >
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>

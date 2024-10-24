@@ -78,9 +78,12 @@ const PostsPage = () => {
     };
   }, [inputValue]);
 
-  const { data: searchRes, isLoading: searchLoading } = useSearchPostQuery(debouncedSearchTerm, {
-    skip: debouncedSearchTerm === "" || debouncedSearchTerm.length < 3,
-  });
+  const { data: searchRes, isLoading: searchLoading } = useSearchPostQuery(
+    debouncedSearchTerm,
+    {
+      skip: debouncedSearchTerm === "" || debouncedSearchTerm.length < 3,
+    }
+  );
 
   // --------------------
 
@@ -88,19 +91,18 @@ const PostsPage = () => {
 
   const { data: tags } = useGetPostsTagListQuery();
   const [currentTag, setCurrentTag] = useState("");
-  const { data: filterRes, isLoading: filterLoading } = useGetPostsByTagQuery(currentTag, {
-    skip: currentTag === "",
-  });
+  const { data: filterRes, isLoading: filterLoading } = useGetPostsByTagQuery(
+    currentTag,
+    {
+      skip: currentTag === "",
+    }
+  );
 
   // --------------------
-  if(isLoading) return(
-    <ReactLoading
-          type={"spin"}
-          color={"#000000"}
-          height={667}
-          width={375}
-        />
-  ) 
+  if (isLoading)
+    return (
+      <ReactLoading type={"spin"} color={"#000000"} height={667} width={375} />
+    );
   return (
     <div className={styles.posts_page}>
       <div
@@ -151,7 +153,7 @@ const PostsPage = () => {
                   : filterRes?.posts
                 : res?.posts;
             return postsToRender?.map((post: Post, index: number) => {
-              const isLastPost = index === postsToRender.length - 1; 
+              const isLastPost = index === postsToRender.length - 1;
               return (
                 <li ref={isLastPost ? lastPostRef : null} key={post.id}>
                   <PostCard post={post} />
