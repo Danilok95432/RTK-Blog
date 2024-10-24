@@ -102,7 +102,7 @@ const PostsPage = () => {
         />
   ) 
   return (
-    <>
+    <div className={styles.posts_page}>
       <div
         className={`${styles.search_bar} ${openSearch ? styles._active : ""}`}
         onMouseEnter={() => setOpenSearch(true)}
@@ -161,7 +161,7 @@ const PostsPage = () => {
           })()}
         </ul>
       )}
-    </>
+    </div>
   );
 };
 

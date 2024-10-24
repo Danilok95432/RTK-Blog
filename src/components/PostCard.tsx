@@ -5,13 +5,14 @@ import UserCard from "./UserCard";
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
   return (
-    <NavLink
-      className={`${styles.link} ${styles.post_card}`}
-      to={`/posts/${post.id}`}
-    >
-      <h2 className={styles.post_card__title}>{post.title}</h2>
-      <p className={styles.post_card__body}>{post.body}</p>
-
+    <div className={styles.post_card}>
+      <NavLink
+        className={styles.link}
+        to={`/posts/${post.id}`}
+      >
+        <h2 className={styles.post_card__title}>{post.title}</h2>
+        <p className={styles.post_card__body}>{post.body}</p>
+      </NavLink>
       <div className={styles.post_card__info}>
         <div className={styles.author}>
           <UserCard id={post?.userId} />
@@ -24,7 +25,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           ))}
         </div>
       </div>
-    </NavLink>
+    </div>
   );
 };
 

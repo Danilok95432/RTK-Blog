@@ -25,6 +25,7 @@ const Comments = () => {
   const commentsRedux = useSelector(
     (state: RootState) => state.comments.comments
   );
+  const commentsPost = commentsRedux.filter((comment) => comment.postId == Number(id))
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -76,8 +77,8 @@ const Comments = () => {
         </button>
       </form>
       <ul className={styles.comments_section__list}>
-        {commentsRedux
-          ? commentsRedux
+        {commentsPost
+          ? commentsPost
               .slice()
               .reverse()
               .map((comment: Comment) => {

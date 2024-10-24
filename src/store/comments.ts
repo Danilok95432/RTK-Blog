@@ -20,8 +20,8 @@ export const comments = createSlice({
       const existingComments = new Set(state.comments.map(comment => comment.id))
       const newComments = action.payload.filter(comment => !existingComments.has(comment.id));
       if (newComments.length > 0) {
-        state.comments.push(...newComments); // Добавляем только новые комментарии
-        localStorage.setItem('comments', JSON.stringify(state.comments)); // Сохраняем в localStorage
+        state.comments.push(...newComments); 
+        localStorage.setItem('comments', JSON.stringify(state.comments)); 
       }
     },
     addComment: (state, action: PayloadAction<Comment>) => {
@@ -31,7 +31,6 @@ export const comments = createSlice({
       localStorage.setItem('comments', JSON.stringify(state.comments));
       let nextId = currentId + 1;
       localStorage.setItem('id', String(nextId));
-      console.log('Current ID:', currentId, 'Next ID:', nextId);
     },
   },
 })

@@ -11,6 +11,9 @@
     font-weight: 600;
   }
   &__fullName {
+    @media (max-width: 425px) {
+      display: none;
+    }
     color: #888;
   }
   &__avatar {

@@ -1,15 +1,21 @@
 .post_page {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
   padding: 20px;
+
+  @media (max-width: 340px) {
+    padding: 0;
+  }
   
   &__content {
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: left;
-  
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: left;
   }
 
   &__title {
