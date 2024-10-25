@@ -12,7 +12,14 @@ const UserPage = () => {
 
   if (isLoading || postsLoading)
     return (
-      <ReactLoading type={"spin"} color={"#000000"} height={667} width={375} />
+      <div className="loading">
+        <ReactLoading
+          type={"spin"}
+          color={"#000000"}
+          height={667}
+          width={375}
+        />
+      </div>
     );
   return (
     <div className={styles.user_page}>

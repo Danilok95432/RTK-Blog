@@ -33,6 +33,21 @@ export const api = createApi({
     sortPosts: builder.query<any, { field: string; direct: string }>({
       query: ({ field, direct }) => `posts?sortBy=${field}&order=${direct}`,
     }),
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: credentials,
+        headers: { "Content-Type": "application/json" },
+      }),
+    }),
+    getMe: builder.mutation({
+      query: (token) => ({
+        url: "/auth/me",
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }),
+    }),
   }),
 });
 
@@ -45,4 +60,6 @@ export const {
   useSearchPostQuery,
   useGetCommentsQuery,
   useGetUserQuery,
+  useLoginMutation,
+  useGetMeMutation,
 } = api;

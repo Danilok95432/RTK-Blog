@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useGetPostQuery } from "../store/api";
-import { NavLink } from "react-router-dom";
 import styles from "../styles/posts/_postpage.module.scss";
 import ReactLoading from "react-loading";
 import Comments from "../components/Comments";
@@ -30,11 +29,17 @@ const PostPage = () => {
 
   if (isLoading)
     return (
-      <ReactLoading type={"spin"} color={"#000000"} height={667} width={375} />
+      <div className="loading">
+        <ReactLoading
+          type={"spin"}
+          color={"#000000"}
+          height={667}
+          width={375}
+        />
+      </div>
     );
   return (
     <div className={styles.post_page}>
-      <NavLink to="/posts">К постам</NavLink>
       {isLoading ? (
         <ReactLoading
           type={"spin"}

@@ -4,6 +4,8 @@ import { api } from "./api";
 import { search } from "./search";
 import { comments } from "./comments";
 import { reactions } from "./reactions";
+import { authorization } from "./authorization";
+import { user } from "./user";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +13,8 @@ export const store = configureStore({
     [search.reducerPath]: search.reducer,
     [comments.reducerPath]: comments.reducer,
     [reactions.reducerPath]: reactions.reducer,
+    [authorization.reducerPath]: authorization.reducer,
+    [user.reducerPath]: user.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),

@@ -54,9 +54,12 @@ export const reactions = createSlice({
           !(reaction.commentId === commentId && reaction.postId === null)
       );
     },
+    clearReactions: (state) => {
+      state.reactions = []
+    }
   },
 });
 
-export const { addReaction, removeReaction } = reactions.actions;
+export const { addReaction, removeReaction, clearReactions } = reactions.actions;
 
 export default reactions.reducer;

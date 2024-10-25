@@ -22,6 +22,7 @@ const schema = Yup.object().shape({
 const Comments = () => {
   const { id } = useParams();
   const { data: res, isLoading } = useGetCommentsQuery(id);
+  const user = useSelector((state: RootState) => state.user.user)
   const commentsRedux = useSelector(
     (state: RootState) => state.comments.comments
   );
@@ -47,7 +48,7 @@ const Comments = () => {
       likes: 0,
       dislikes: 0,
       postId: Number(id),
-      user: { id: 1, username: "Me", fullName: "" },
+      user: { id: Number(user?.id), username: String(user?.username), fullName: String(user?.firstName + ' ' + user?.lastName) },
     };
     dispatch(addComment(commentObj));
     reset();

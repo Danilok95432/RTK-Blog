@@ -101,7 +101,14 @@ const PostsPage = () => {
   // --------------------
   if (isLoading)
     return (
-      <ReactLoading type={"spin"} color={"#000000"} height={667} width={375} />
+      <div className="loading">
+        <ReactLoading
+          type={"spin"}
+          color={"#000000"}
+          height={667}
+          width={375}
+        />
+      </div>
     );
   return (
     <div className={styles.posts_page}>
