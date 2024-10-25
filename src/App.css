@@ -12,3 +12,12 @@
 .loading {
   padding-top: 150px;
 }
+
+.error_card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}

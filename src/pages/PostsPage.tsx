@@ -12,6 +12,7 @@ import { Post } from "../interfaces/interfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { changeValue } from "../store/search";
+import ErrorCard from "../components/ErrorCard";
 
 const PostsPage = () => {
   // ленивая загрузка
@@ -159,14 +160,16 @@ const PostsPage = () => {
                   ? searchRes?.posts
                   : filterRes?.posts
                 : res?.posts;
-            return postsToRender?.map((post: Post, index: number) => {
-              const isLastPost = index === postsToRender.length - 1;
-              return (
-                <li ref={isLastPost ? lastPostRef : null} key={post.id}>
-                  <PostCard post={post} />
-                </li>
-              );
-            });
+            if (postsToRender?.length == 0) return <ErrorCard />;
+            else
+              return postsToRender?.map((post: Post, index: number) => {
+                const isLastPost = index === postsToRender.length - 1;
+                return (
+                  <li ref={isLastPost ? lastPostRef : null} key={post.id}>
+                    <PostCard post={post} />
+                  </li>
+                );
+              });
           })()}
         </ul>
       )}
