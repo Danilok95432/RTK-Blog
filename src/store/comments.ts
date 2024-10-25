@@ -23,16 +23,19 @@ export const comments = createSlice({
       const newComments = action.payload.filter(
         (comment) => !existingComments.has(comment.id)
       );
+
       if (newComments.length > 0) {
-        state.comments.push(...newComments);
+        state.comments = [...state.comments, ...newComments];
         localStorage.setItem("comments", JSON.stringify(state.comments));
       }
     },
+
     addComment: (state, action: PayloadAction<Comment>) => {
       let currentId = JSON.parse(localStorage.getItem("id") ?? "1000");
-      action.payload.id = currentId;
-      state.comments.push(action.payload);
+      const newComment = { ...action.payload, id: currentId };
+      state.comments = [...state.comments, newComment];
       localStorage.setItem("comments", JSON.stringify(state.comments));
+
       let nextId = currentId + 1;
       localStorage.setItem("id", String(nextId));
     },

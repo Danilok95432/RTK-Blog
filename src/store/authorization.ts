@@ -20,16 +20,28 @@ export const authorization = createSlice({
   initialState,
   reducers: {
     changeLog: (state, action: PayloadAction<boolean>) => {
-      state.isAuth = action.payload;
+      return {
+        ...state,
+        isAuth: action.payload
+      }
     },
     changeUsername: (state, action: PayloadAction<string>) => {
-      state.username = action.payload;
+      return {
+        ...state,
+        username: action.payload
+      }
     },
     changePassword: (state, action: PayloadAction<string>) => {
-      state.password = action.payload;
+      return {
+        ...state,
+        password: action.payload
+      }
     },
     setToken: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
+      return {
+        ...state,
+        token: action.payload
+      }
     },
   },
 });

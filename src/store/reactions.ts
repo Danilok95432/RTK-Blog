@@ -22,15 +22,17 @@ export const reactions = createSlice({
           (reaction.commentId === commentId && reaction.postId === null)
       );
 
+      let newReactions = [...state.reactions];
+
       if (existingReactionIndex !== -1) {
-        const existingReaction = state.reactions[existingReactionIndex];
+        const existingReaction = newReactions[existingReactionIndex];
         if (
           (reactionType === "like" && existingReaction.like) ||
           (reactionType === "dislike" && existingReaction.dislike)
         ) {
-          state.reactions.splice(existingReactionIndex, 1);
+          newReactions.splice(existingReactionIndex, 1);
         } else {
-          state.reactions[existingReactionIndex] = {
+          newReactions[existingReactionIndex] = {
             like: reactionType === "like",
             dislike: reactionType === "dislike",
             postId: existingReaction.postId,
@@ -38,28 +40,41 @@ export const reactions = createSlice({
           };
         }
       } else {
-        state.reactions.push({
+        newReactions.push({
           like: reactionType === "like",
           dislike: reactionType === "dislike",
           postId: postId || null,
           commentId: commentId || null,
         });
       }
+
+      return {
+        ...state,
+        reactions: newReactions,
+      };
     },
     removeReaction: (state, action: PayloadAction<AddReactionPayload>) => {
       const { postId, commentId } = action.payload;
-      state.reactions = state.reactions.filter(
+      let newReactions = state.reactions.filter(
         (reaction) =>
           !(reaction.postId === postId && reaction.commentId === null) &&
           !(reaction.commentId === commentId && reaction.postId === null)
       );
+      return {
+        ...state,
+        reactions: newReactions,
+      };
     },
     clearReactions: (state) => {
-      state.reactions = []
-    }
+      return {
+        ...state,
+        reactions: [],
+      };
+    },
   },
 });
 
-export const { addReaction, removeReaction, clearReactions } = reactions.actions;
+export const { addReaction, removeReaction, clearReactions } =
+  reactions.actions;
 
 export default reactions.reducer;
