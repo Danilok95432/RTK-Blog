@@ -5,7 +5,7 @@ import { RootState } from "../store/store";
 import { changeLog, setToken } from "../store/authorization";
 import { useGetMeMutation } from "../store/api";
 import { useEffect } from "react";
-import { setUser } from "../store/user";
+import { logout, setUser } from "../store/user";
 import { clearReactions } from "../store/reactions";
 
 const Header = () => {
@@ -20,6 +20,7 @@ const Header = () => {
     dispatch(changeLog(false));
     dispatch(setToken(""));
     dispatch(clearReactions());
+    dispatch(logout())
   };
 
   const getMe = async (token: string) => {

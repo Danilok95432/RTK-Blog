@@ -2,7 +2,7 @@ import { useGetCommentsQuery } from "../store/api";
 import styles from "../styles/comments/_comments.module.scss";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Comment } from "../interfaces/interfaces";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CommentCard from "./CommentCard";
 import { useDispatch, useSelector } from "react-redux";
 import { CommentForm } from "../interfaces/interfaces";
@@ -29,6 +29,7 @@ const Comments = () => {
   const commentsPost = commentsRedux.filter(
     (comment) => comment.postId == Number(id)
   );
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,16 +43,19 @@ const Comments = () => {
   });
 
   const onSubmit: SubmitHandler<CommentForm> = (data) => {
-    const commentObj = {
-      body: data.comment,
-      id: 1000,
-      likes: 0,
-      dislikes: 0,
-      postId: Number(id),
-      user: { id: Number(user?.id), username: String(user?.username), fullName: String(user?.firstName + ' ' + user?.lastName) },
-    };
-    dispatch(addComment(commentObj));
-    reset();
+    if(user){
+      const commentObj = {
+        body: data.comment,
+        id: 1000,
+        likes: 0,
+        dislikes: 0,
+        postId: Number(id),
+        user: { id: Number(user?.id), username: String(user?.username), fullName: String(user?.firstName + ' ' + user?.lastName) },
+      };
+      dispatch(addComment(commentObj));
+      reset();
+    }
+    else navigate('/authorization')
   };
   if (isLoading)
     return (
