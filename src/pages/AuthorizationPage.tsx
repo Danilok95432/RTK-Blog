@@ -41,6 +41,7 @@ const AuthorizationPage = () => {
         password: data.password,
         expiresInMins: 30,
       }).unwrap();
+      console.log(response)
       dispatch(changeLog(true));
       dispatch(setToken(response.accessToken));
       navigate("/posts");
@@ -77,6 +78,7 @@ const AuthorizationPage = () => {
             className={styles.form_input}
           />
           <button
+            type="button"
             className={`${styles.password_btn} ${
               showPassword ? styles._close : styles._open
             }`}
