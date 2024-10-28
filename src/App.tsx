@@ -6,7 +6,7 @@ import UserPage from "./pages/UserPage";
 import AuthorizationPage from "./pages/AuthorizationPage";
 import Header from "./components/Header";
 
-function App() {
+function App() { 
   return (
     <Router>
       <Header />

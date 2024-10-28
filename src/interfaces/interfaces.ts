@@ -1,11 +1,11 @@
 export interface Post {
   id: number;
   title: string;
-  body: string;
+  body: string; 
   userId: number;
   views: number;
   reactions: { [key: string]: number };
-  tags: string[];
+  tags: string[]; 
 }
 
 export interface Comment {
