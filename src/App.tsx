@@ -4,7 +4,7 @@ import PostPage from "./pages/PostPage";
 import PostsPage from "./pages/PostsPage";
 import UserPage from "./pages/UserPage";
 import AuthorizationPage from "./pages/AuthorizationPage";
-import Header from "./components/Header";
+import Header from "./components/Header"; 
 
 function App() {
   return (
